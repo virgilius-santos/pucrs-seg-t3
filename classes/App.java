@@ -11,12 +11,12 @@ public class App {
 
         validateFunctions();
 
-        final String h0String = generateH0("FuncoesResumo - SHA1.mp4");
+        final String h0String = generateH0("FuncoesResumo - Hash Functions.mp4");
         System.out.println("\nh0 = " + h0String + "\n");
     }
 
     private static String generateH0(String path) throws Exception {
-        final byte[] file = read("FuncoesResumo - SHA1.mp4");
+        final byte[] file = read(path);
         final byte[][] matriz = convert(file);
         final byte[][] encoded = convert(matriz);
         final byte[] h0 = encoded[0];
