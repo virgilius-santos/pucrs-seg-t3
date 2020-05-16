@@ -11,16 +11,23 @@ public class App {
 
         validateFunctions();
 
-        final String h0String = generateH0("FuncoesResumo - Hash Functions.mp4");
+        final String h0String = generateH0("FuncoesResumo - Hash Functions.mp4", true);
         System.out.println("\nh0 = " + h0String + "\n");
     }
 
-    private static String generateH0(String path) throws Exception {
+    private static String generateH0(String path, boolean print) throws Exception {
         final byte[] file = read(path);
         final byte[][] matriz = convert(file);
         final byte[][] encoded = convert(matriz);
         final byte[] h0 = encoded[0];
         final String h0String = byteArrayToHexString(h0);
+
+        if (!print) return h0String;
+        System.out.println("Total number of bytes: " + file.length
+        + " Last block size: " + matriz[matriz.length-1].length
+        + " Number of blocks: " + matriz.length
+        );
+        
         return h0String;
     }
 
@@ -53,6 +60,10 @@ public class App {
         wordExpected = "302256b74111bcba1c04282a1e31da7e547d4a7098cdaec8330d48bd87569516";
         bytesReceived = encoded[0];
         wordEncoded = byteArrayToHexString(bytesReceived);
+        if (!wordEncoded.equals(wordExpected.toUpperCase()))
+            throw new Exception("erro no h0: " + wordEncoded);
+
+        wordEncoded = generateH0("FuncoesResumo - SHA1.mp4", false);
         if (!wordEncoded.equals(wordExpected.toUpperCase()))
             throw new Exception("erro no h0: " + wordEncoded);
     }
