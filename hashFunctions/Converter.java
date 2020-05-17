@@ -3,8 +3,7 @@ import java.security.MessageDigest;
 import static java.security.MessageDigest.getInstance;
 import static java.util.Arrays.copyOfRange;
 
-public class Converter
-{
+public class Converter {
     final byte[] file;
     final byte[][] blocks;
     final byte[][] matrizH;
@@ -16,17 +15,16 @@ public class Converter
     final int lastBlockSize;
     final int numberOfBytes;
 
-    public Converter(byte[] file) throws Exception
-    {
+    public Converter(byte[] file) throws Exception {
         this.file = file;
         this.blocks = convertInBlocks(file);
         this.matrizH = convertMatrizH(blocks);
         this.h0 = matrizH[0];
-        this.hn_1 = matrizH[matrizH.length-1];
+        this.hn_1 = matrizH[matrizH.length - 1];
         this.h0String = byteArrayToHexString(h0);
         this.hn_1String = byteArrayToHexString(hn_1);
         this.numberOfBlocks = blocks.length;
-        this.lastBlockSize = blocks[blocks.length-1].length;
+        this.lastBlockSize = blocks[blocks.length - 1].length;
         this.numberOfBytes = file.length;
     }
 
@@ -86,11 +84,7 @@ public class Converter
     }
 
     public String toString() {
-        return "Total number of bytes: " + numberOfBytes
-            + " Last block size: " + lastBlockSize
-            + " Number of blocks: " + numberOfBlocks
-            + "\nh[0]: " + h0String
-            + "\nh[n-1]: " + hn_1String
-        ;
+        return "Total number of bytes: " + numberOfBytes + " Last block size: " + lastBlockSize + " Number of blocks: "
+                + numberOfBlocks + "\nh[0]: " + h0String + "\nh[n-1]: " + hn_1String;
     }
 }
